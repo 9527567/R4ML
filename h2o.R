@@ -1,0 +1,44 @@
+library(h2o)
+h2o.init(
+    nthreads = 6,
+    max_mem_size = "8G"
+)
+train_data <- h2o.importFile("/home/jack/workhome/R4ML/mnist_train2.csv")
+test_data <- h2o.importFile("/home/jack/workhome/R4ML/mnist_test2.csv")
+y_train <- as.factor(as.matrix(train_data[, 1]))
+y_test <- as.factor(as.matrix(test_data[, 1]))
+model <- h2o.deeplearning(
+    x = 2:785,
+    y = 1,
+    training_frame = train_data,
+    activation = "Tanh",
+    hidden = c(1000, 1000, 1000),
+    epochs = 10000
+)
+model
+
+yhat_train <- h2o.predict(model, train_data)$predict
+yhat_train <- as.factor(as.matrix(yhat_train))
+ytrain <- as.numeric(as.character((y_train)))
+ytrain_hat <- as.numeric(as.character(yhat_train))
+e <- 0
+for (i in 1:60000)
+{
+    if (ytrain[i] <- round(ytrain_hat[i])) {
+        e <- e + 1
+    }
+}
+
+yhat_test <- h2o.predict(model, test_data)$predict
+yhat_test <- as.factor(as.matrix(yhat_test))
+ytest <- as.numeric(as.character(y_test))
+ytest_hat <- as.numeric(as.character(yhat_test))
+s <- 0
+for (i in 1:10000)
+{
+    if (ytest[i] == round(ytest_hat[i])) {
+        s <- s + 1
+    }
+}
+train_acc <- e / 60000
+test_acc <- s / 10000
