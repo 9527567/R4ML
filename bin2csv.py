@@ -20,8 +20,8 @@ def convert(imgf, labelf, outf, n):
     l.close()
  
 convert("train-images-idx3-ubyte", "train-labels-idx1-ubyte",
-        "mnist_train2.csv", 60000)
+        "mnist_train.csv", 60000)
 convert("t10k-images-idx3-ubyte","t10k-labels-idx1-ubyte",
-        "mnist_test2.csv", 10000)
+        "mnist_test.csv", 10000)
  
 print("Convert Finished!")

@@ -7,7 +7,7 @@ library(future)
 
 
 # 读取训练数据
-train_data <- read_csv("mnist_train2.csv")
+train_data <- read_csv("mnist_train.csv")
 train_data <- as_tibble(train_data)
 
 

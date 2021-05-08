@@ -1,11 +1,11 @@
-source("./function.R")
+source("./mlr3_function.R")
 options(warn = -1)
 
 # 读取训练集，以及测试集，此处测试集用于观察模型是否过拟合
-train_data <- read_Data("mnist_train2.csv")
-test_data <- read_Data("mnist_test2.csv")
+train_data <- read_Data("mnist_train.csv")
+test_data <- read_Data("mnist_test.csv")
 
-rpart_result <- learn_kknn(train_data, k = 10)
+rpart_result <- learn_svm(train_data)
 print(paste("rpart train Accuracy:", rpart_result[[1]]))
 
 rpart_result_acc <- learn_predictions(test_data, rpart_result[[2]])
