@@ -4,8 +4,8 @@ h2o.init(
     max_mem_size = "8G"
 )
 # 此处地址需要输入绝对路径
-train_data <- h2o.importFile("/home/jack/workhome/R4ML/mnist_train2.csv")
-test_data <- h2o.importFile("/home/jack/workhome/R4ML/mnist_test2.csv")
+train_data <- h2o.importFile("/home/jack/workhome/R4ML/mnist_train.csv")
+test_data <- h2o.importFile("/home/jack/workhome/R4ML/mnist_test.csv")
 y_train <- as.factor(as.matrix(train_data[, 1]))
 y_test <- as.factor(as.matrix(test_data[, 1]))
 model <- h2o.deeplearning(
@@ -13,7 +13,7 @@ model <- h2o.deeplearning(
     y = 1,
     training_frame = train_data,
     activation = "Tanh",
-    hidden = c(1000, 1000, 1000, 1000, 1000, 1000, 1000),
+    hidden = c(100, 1000, 100),
     epochs = 100
 )
 model
