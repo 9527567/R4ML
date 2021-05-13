@@ -72,7 +72,7 @@ learn_rpart <- function(data,
   predictions <- learner$predict(task_train, row_ids <- test)
   measure <- mlr3::msr("classif.acc")
   train_acc <- predictions$score(measure)
-  print(paste("before auto tuning,the acc is:", train_acc))
+  print(paste("before auto tuning,the rpart acc is:", train_acc))
   search_space <- ps(
             cp = p_dbl(lower = 1e-20, upper = 0.1),
             minsplit = p_int(lower = 1, upper = 10)
@@ -136,10 +136,10 @@ learn_svm <- function(data,
   predictions <- learner$predict(task_train, row_ids <- test)
   measure <- mlr3::msr("classif.acc")
   train_acc <- predictions$score(measure)
-  print(paste("before auto tuning,the acc is:", train_acc))
+  print(paste("before auto tuning,the svm acc is:", train_acc))
   search_space <- ps(
             cost = p_dbl(lower = 0.1, upper = 10),
-            kernel = p_fct(levels = c("polynomial", "radial","linear","sigmoid"))
+            kernel = p_fct(levels = c("polynomial", "sigmoid"))
       )
   measure <- mlr3::msr("classif.ce")
   terminator <- mlr3tuning::trm("evals", n_evals = 10)
@@ -182,7 +182,7 @@ learn_kknn <- function(data,
   predictions <- learner$predict(task_train, row_ids <- test)
   measure <- mlr3::msr("classif.acc")
   train_acc <- predictions$score(measure)
-  print(paste("before auto tuning,the acc is:", train_acc))
+  print(paste("before auto tuning,the kknn acc is:", train_acc))
   search_space <- ps(
             k = p_int(lower = 1, upper = 100),
             distance = p_int(lower = 0, upper = 50)
@@ -226,7 +226,7 @@ learn_naive_bayes <- function(data,
   predictions <- learner$predict(task_train, row_ids <- test)
   measure <- mlr3::msr("classif.acc")
   train_acc <- predictions$score(measure)
-  print(paste("before auto tuning,the acc is:", train_acc))
+  print(paste("before auto tuning,the naive_bayes acc is:", train_acc))
   search_space <- ps(
             threshold = p_dbl(lower = 1e-10, upper = 1.0)
       )
@@ -277,7 +277,7 @@ learn_ranger <- function(data,
   predictions <- learner$predict(task_train, row_ids <- test)
   measure <- mlr3::msr("classif.acc")
   train_acc <- predictions$score(measure)
-  print(paste("before auto tuning,the acc is:", train_acc))
+  print(paste("before auto tuning,the ranger acc is:", train_acc))
   search_space <- ps(
             alpha = p_dbl(lower = 0.01, upper = 10),
             num.trees = p_int(lower = 100, upper = 5000)
