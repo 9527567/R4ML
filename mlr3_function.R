@@ -279,7 +279,7 @@ learn_ranger <- function(data,
   train_acc <- predictions$score(measure)
   print(paste("before auto tuning,the ranger acc is:", train_acc))
   search_space <- ps(
-            alpha = p_dbl(lower = 0.01, upper = 10),
+            alpha = p_dbl(lower = 0.01, upper = 1),
             num.trees = p_int(lower = 100, upper = 5000)
       )
   measure <- mlr3::msr("classif.ce")
