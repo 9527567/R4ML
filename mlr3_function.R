@@ -185,7 +185,7 @@ learn_kknn <- function(data,
   print(paste("before auto tuning,the kknn acc is:", train_acc))
   search_space <- ps(
             k = p_int(lower = 1, upper = 100),
-            distance = p_int(lower = 0, upper = 50)
+            distance = p_int(lower = 1, upper = 50)
       )
   measure <- mlr3::msr("classif.ce")
   terminator <- mlr3tuning::trm("evals", n_evals = 10)
@@ -280,7 +280,7 @@ learn_ranger <- function(data,
   print(paste("before auto tuning,the ranger acc is:", train_acc))
   search_space <- ps(
             alpha = p_dbl(lower = 0.01, upper = 1),
-            num.trees = p_int(lower = 100, upper = 5000)
+            num.trees = p_int(lower = 100, upper = 10000)
       )
   measure <- mlr3::msr("classif.ce")
   terminator <- mlr3tuning::trm("evals", n_evals = 10)
